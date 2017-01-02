@@ -72,7 +72,7 @@ describe('Sudoku', function() {
 
     describe('#columnHas', function() {
         it('should work', function(){
-            let s = new Sudoku( FIELD );
+            let s = new Sudoku(FIELD);
             expect(s.columnHas(0, 6)).to.equal(true);
             expect(s.columnHas(0, 3)).to.equal(false);
             expect(s.columnHas(4, 8)).to.equal(true);
@@ -85,7 +85,7 @@ describe('Sudoku', function() {
 
     describe('#squareHas', function() {
         it('should work', function() {
-            let s = new Sudoku( FIELD );
+            let s = new Sudoku(FIELD);
             expect(s.squareHas(0, 0, 6)).to.equal(true);
             expect(s.squareHas(2, 2, 6)).to.equal(true);
             expect(s.squareHas(1, 1, 2)).to.equal(false);
@@ -100,15 +100,30 @@ describe('Sudoku', function() {
 
 
     describe('#set', function() {
-        let s;
-        beforeEach(() => s = new Sudoku(FIELD));
-
         it('should not set value', function() {
+            let s = new Sudoku(FIELD);
+            expect(s.set(0, 0, 8)).to.equal(false);
+            expect(s.get(0, 0)).to.equal(0);
+
+            expect(s.set(0, 0, 5)).to.equal(false);
+            expect(s.get(0, 0)).to.equal(0);
+
+            expect(s.set(4, 0, 5)).to.equal(false);
+            expect(s.get(4, 0)).to.equal(0);
+        });
+
+
+        it('should set value', function() {
+            let s = new Sudoku(FIELD);
+
             expect(s.set(0, 0, 0)).to.equal(true);
             expect(s.get(0, 0)).to.equal(0);
 
             expect(s.set(0, 1, 7)).to.equal(true);
             expect(s.get(0, 1)).to.equal(7);
+
+            expect(s.set(8, 0, 3)).to.equal(true);
+            expect(s.get(8, 0)).to.equal(3);
         });
     });
 });
