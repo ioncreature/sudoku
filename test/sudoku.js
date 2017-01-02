@@ -126,4 +126,57 @@ describe('Sudoku', function() {
             expect(s.get(8, 0)).to.equal(3);
         });
     });
+
+
+    describe('#getEmptyCells', function() {
+        it('should return empty cells', function() {
+            let s = new Sudoku(FIELD);
+            expect(s.getEmptyCells()).to.deep.equal([
+                [0, 0], [0, 2], [0, 4], [0, 6], [0, 8],
+                [1, 2], [1, 3], [1, 5], [1, 6],
+                [2, 0], [2, 1], [2, 4], [2, 5], [2, 7], [2, 8],
+                [3, 2], [3, 3], [3, 5], [3, 6], [3, 7],
+                [4, 0], [4, 2], [4, 4], [4, 8],
+                [5, 1], [5, 2], [5, 5], [5, 6], [5, 7],
+                [6, 0], [6, 1], [6, 4], [6, 7], [6, 8],
+                [7, 2], [7, 3], [7, 5], [7, 6],
+                [8, 0], [8, 2], [8, 4], [8, 6], [8, 8]
+            ]);
+        });
+    });
+
+
+    describe('#getSquareValuesFromPoint', function() {
+        it('should return right squares values', function() {
+            let s = new Sudoku(FIELD);
+            expect(s.getSquareValuesFromPoint(0, 0)).to.deep.equal([0, 7, 0, 6, 8, 0, 0, 0, 1]);
+            expect(s.getSquareValuesFromPoint(1, 1)).to.deep.equal([0, 7, 0, 6, 8, 0, 0, 0, 1]);
+            expect(s.getSquareValuesFromPoint(0, 6)).to.deep.equal([0, 6, 0, 0, 7, 9, 8, 0, 0]);
+            expect(s.getSquareValuesFromPoint(2, 4)).to.deep.equal([3, 0, 8, 0, 4, 0, 5, 0, 0]);
+            expect(s.getSquareValuesFromPoint(4, 4)).to.deep.equal([0, 3, 0, 6, 0, 1, 8, 7, 0]);
+            expect(s.getSquareValuesFromPoint(8, 8)).to.deep.equal([4, 0, 0, 0, 9, 1, 0, 5, 0]);
+        });
+    });
+
+
+    describe('#calcProbableValues', function() {
+        it('should return probable values', function() {
+            let s = new Sudoku(FIELD);
+            expect(s.calcProbableValues(0, 0)).to.deep.equal([2, 4, 9]);
+            expect(s.calcProbableValues(0, 6)).to.deep.equal([1, 2, 5]);
+            expect(s.calcProbableValues(4, 4)).to.deep.equal([2, 5, 9]);
+            expect(s.calcProbableValues(8, 8)).to.deep.equal([3, 6, 7]);
+            expect(s.calcProbableValues(3, 3)).to.deep.equal([4]);
+        });
+    });
+
+
+    describe('#solve', function(){
+        it.only('should solve simple sudoku', function() {
+            let s = new Sudoku(FIELD);
+            console.log(s.toString());
+            expect(s.solve().solved).to.equal(true);
+            expect(s.getEmptyCells()).to.deep.equal([]);
+        });
+    });
 });
