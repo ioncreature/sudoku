@@ -91,7 +91,7 @@ describe('Sudoku', function() {
             expect(s.squareHas(1, 1, 2)).to.equal(false);
             expect(s.squareHas(3, 0, 4)).to.equal(true);
             expect(s.squareHas(5, 2, 5)).to.equal(true);
-            expect(s.squareHas(4, 1, 8)).to.equal(true);
+            expect(s.squareHas(4, 1, 8)).to.equal(false);
             expect(s.squareHas(6, 6, 4)).to.equal(true);
             expect(s.squareHas(7, 7, 9)).to.equal(true);
             expect(s.squareHas(8, 8, 7)).to.equal(false);
@@ -172,11 +172,80 @@ describe('Sudoku', function() {
 
 
     describe('#solve', function(){
-        it.only('should solve simple sudoku', function() {
+        it('should solve easiest sudoku', function() {
             let s = new Sudoku(FIELD);
             console.log(s.toString());
             expect(s.solve().solved).to.equal(true);
             expect(s.getEmptyCells()).to.deep.equal([]);
         });
+
+
+        it('should solve easy sudoku', function() {
+            let s = new Sudoku([
+                [0, 3, 5, 2, 9, 0, 8, 6, 4],
+                [0, 8, 2, 4, 1, 0, 7, 0, 3],
+                [7, 6, 4, 3, 8, 0, 0, 9, 0],
+                [2, 1, 8, 7, 3, 9, 0, 4, 0],
+                [0, 0, 0, 8, 0, 4, 2, 3, 0],
+                [0, 4, 3, 0, 5, 2, 9, 7, 0],
+                [4, 0, 6, 5, 7, 1, 0, 0, 9],
+                [3, 5, 9, 0, 2, 8, 4, 1, 7],
+                [8, 0, 0, 9, 0, 0, 5, 2, 6]
+            ]);
+            expect(s.solve().solved).to.equal(true);
+            expect(s.getEmptyCells()).to.deep.equal([]);
+        });
+
+
+        it('should solve normal sudoku', function() {
+            let s = new Sudoku([
+                [0, 6, 5, 0, 0, 0, 4, 9, 0],
+                [9, 0, 0, 0, 0, 0, 0, 0, 7],
+                [7, 0, 0, 9, 3, 6, 0, 0, 2],
+                [0, 0, 9, 3, 0, 5, 6, 0, 0],
+                [0, 0, 6, 0, 8, 0, 9, 0, 0],
+                [0, 0, 8, 6, 0, 2, 7, 0, 0],
+                [8, 0, 0, 4, 2, 1, 0, 0, 6],
+                [6, 0, 0, 0, 0, 0, 0, 0, 8],
+                [0, 4, 2, 0, 0, 0, 1, 7, 0]
+            ]);
+            expect(s.solve().solved).to.equal(true);
+            expect(s.getEmptyCells()).to.deep.equal([]);
+        });
+
+
+        it('should solve hard sudoku', function() {
+            let s = new Sudoku([
+                [0, 0, 9, 4, 0, 0, 8, 5, 0],
+                [5, 0, 0, 7, 0, 0, 4, 0, 0],
+                [2, 8, 0, 1, 0, 0, 0, 0, 0],
+                [0, 9, 5, 0, 0, 1, 0, 0, 0],
+                [0, 1, 0, 0, 6, 0, 0, 4, 0],
+                [0, 0, 0, 9, 0, 0, 5, 7, 0],
+                [0, 0, 0, 0, 0, 9, 0, 6, 4],
+                [0, 0, 7, 0, 0, 5, 0, 0, 9],
+                [0, 4, 8, 0, 0, 7, 3, 0, 0]
+            ]);
+            expect(s.solve().solved).to.equal(true);
+            expect(s.getEmptyCells()).to.deep.equal([]);
+        });
+
+
+        it('should solve hardest sudoku', function() {
+            let s = new Sudoku([
+                [4, 0, 9, 0, 0, 6, 0, 0, 0],
+                [0, 5, 0, 9, 0, 0, 7, 1, 0],
+                [0, 0, 0, 0, 3, 0, 6, 0, 0],
+                [5, 0, 0, 0, 0, 2, 0, 0, 0],
+                [8, 4, 0, 0, 0, 0, 0, 2, 7],
+                [0, 0, 0, 1, 0, 0, 0, 0, 8],
+                [0, 0, 5, 0, 6, 0, 0, 0, 0],
+                [0, 1, 7, 0, 0, 4, 0, 5, 0],
+                [0, 0, 0, 2, 0, 0, 3, 0, 9]
+            ]);
+            expect(s.solve().solved).to.equal(true);
+            expect(s.getEmptyCells()).to.deep.equal([]);
+        });
+
     });
 });
