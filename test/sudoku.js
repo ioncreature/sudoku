@@ -172,9 +172,8 @@ describe('Sudoku', function() {
 
 
     describe('#solve', function(){
-        it('should solve easiest sudoku', function() {
+        it.only('should solve easiest sudoku', function() {
             let s = new Sudoku(FIELD);
-            console.log(s.toString());
             expect(s.solve().solved).to.equal(true);
             expect(s.getEmptyCells()).to.deep.equal([]);
         });
