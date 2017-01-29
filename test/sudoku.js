@@ -167,12 +167,15 @@ describe('Sudoku', function() {
             expect(s.calcProbableValues(4, 4)).to.deep.equal([2, 5, 9]);
             expect(s.calcProbableValues(8, 8)).to.deep.equal([3, 6, 7]);
             expect(s.calcProbableValues(3, 3)).to.deep.equal([4]);
+            expect(s.calcProbableValues(7, 6)).to.deep.equal([2, 3]);
+            expect(s.calcProbableValues(7, 6)).to.deep.equal([2, 3]);
+            expect(s.calcProbableValues(5, 1)).to.deep.equal([3, 9]);
         });
     });
 
 
     describe('#solve', function(){
-        it.only('should solve easiest sudoku', function() {
+        it('should solve easiest sudoku', function() {
             let s = new Sudoku(FIELD);
             expect(s.solve().solved).to.equal(true);
             expect(s.getEmptyCells()).to.deep.equal([]);
